@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7bb05552-4e7b-4030-a254-37339b7b7e2f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     products.`pname` AS products_pname,
+     products.`quantity` AS products_quantity,
+     products.`areacode` AS products_areacode,
+     products.`name` AS products_name,
+     products.`cost` AS products_cost
+FROM
+     `products` products]]>
+	</queryString>
+	<field name="products_pname" class="java.lang.String"/>
+	<field name="products_quantity" class="java.lang.Integer"/>
+	<field name="products_areacode" class="java.lang.Integer"/>
+	<field name="products_name" class="java.lang.String"/>
+	<field name="products_cost" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="112" y="0" width="449" height="35" uuid="35ceed52-7963-45c1-ad04-d3765835ace3"/>
+				<textElement>
+					<font size="24" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Children's home Report]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="30" width="115" height="20" uuid="1cec39ce-86e8-40b2-a62c-8525ca1fe386"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name of the home]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="162" y="30" width="100" height="20" uuid="54cfc494-7bda-4fbd-a55c-79a5b3bf9818"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Areacode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="309" y="30" width="100" height="20" uuid="657c8b8e-b330-42a4-9a7f-53f9f1c7be37"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="30" width="100" height="20" uuid="ffa2f9b4-5683-4225-a2d6-df37c3515206"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product costs]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement x="12" y="12" width="100" height="20" uuid="fbfdf2ed-4386-4106-9be3-d1f4fdd858d5"/>
+				<textFieldExpression><![CDATA[$F{products_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="12" width="100" height="20" uuid="ed539269-880e-4005-9cc6-1192784b0efe"/>
+				<textFieldExpression><![CDATA[$F{products_areacode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="309" y="12" width="100" height="20" uuid="dcf8b91c-cc8c-4194-9add-e85868c24179"/>
+				<textFieldExpression><![CDATA[$F{products_pname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="12" width="100" height="20" uuid="0291d66a-f820-4fbb-b5cc-a57a5481da49"/>
+				<textFieldExpression><![CDATA[$F{products_cost}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>
