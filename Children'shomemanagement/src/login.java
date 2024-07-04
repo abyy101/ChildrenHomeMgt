@@ -198,12 +198,14 @@ public class login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try {
-        /*String usermail = mail.getText();
+    // TODO add your handling code here:
+    try {
+        String usermail = mail.getText();
         String userPass = password.getText();
 
-          System.out.println("User Email: " + usermail);//for debugging pp
-    System.out.println("User Password: " + userPass);
+        System.out.println("User Email: " + usermail); // for debugging purposes
+        System.out.println("User Password: " + userPass);
+
         // Create a connection to the database
         Connection();
 
@@ -213,18 +215,30 @@ public class login extends javax.swing.JFrame {
 
         rs = st.executeQuery();
         if (rs.next()) {
-            setVisible(false);
-            home object = new home();
-            object.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Password or email is invalid.");
-        }*/
-
-        new home().setVisible(true);
-    } 
-        catch (Exception e) {
+            if ("esther@gmail.com".equals(usermail)) {
+                setVisible(false);
+                Admissions object = new Admissions();
+                object.setVisible(true);
+            } else {
+                setVisible(false);
+                home object = new home();
+                object.setVisible(true);
+            }
+        } 
+    } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
+    } finally {
+        // Close resources
+        try {
+            if (rs != null) rs.close();
+            if (st != null) st.close();
+            if (conn != null) conn.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
     }
+
+
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

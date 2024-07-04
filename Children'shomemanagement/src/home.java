@@ -426,9 +426,7 @@ public class home extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
-        Admissions object=new Admissions();
-        object.setVisible(true);
+        
         
     }//GEN-LAST:event_jButton7ActionPerformed
 private JFreeChart createStudentChart() {
