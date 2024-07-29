@@ -33,20 +33,21 @@ public class AddProduct extends javax.swing.JFrame {
         conn=databaseConnection.connection();
     }
     private boolean Presenthomes(String name, int areacode) {
-        try {
-            String sql = "SELECT * FROM home WHERE name=? AND area=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, name);
-         ps.setInt(2,areacode);
-         
-            ResultSet rs = ps.executeQuery();
-
+    String sql = "SELECT * FROM home WHERE name=? AND area=?";
+    
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, name);
+        ps.setInt(2, areacode);
+        
+        try (ResultSet rs = ps.executeQuery()) {
             return rs.next();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-            return false;
         }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e);
+        return false;
     }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -311,42 +312,41 @@ public class AddProduct extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        try {
-        String pname=Pname.getText();
+       try {
+        String pname = Pname.getText();
         String Description = decription.getText();
-        
-         String Category = category.getText();//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          
-        int BarCode =Integer.parseInt(barcode.getText());
+        String Category = category.getText();
+        int BarCode = Integer.parseInt(barcode.getText());
         int Cost = Integer.parseInt(cost.getText());
         int Quantity = Integer.parseInt(quantity.getText());
         String Name = name.getText();
-        int Areacode=Integer.parseInt(areacode.getText());
+        int Areacode = Integer.parseInt(areacode.getText());
 
-        
         if (!Presenthomes(Name, Areacode)) {
             JOptionPane.showMessageDialog(null, "Cannot add products, home is not registered.");
-            return; // Stop enrollment if home is not active
+            // Stop enrollment if home is not active
+        } else {
+            // If the condition is met, proceed with enrollment
+            String sql = "INSERT INTO products(pname, description, cost, quantity, barcode, areacode, category, name) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, pname);
+                ps.setString(2, Description);
+                ps.setInt(3, Cost);
+                ps.setInt(4, Quantity);
+                ps.setInt(5, BarCode);
+                ps.setInt(6, Areacode);
+                ps.setString(7, Category);
+                ps.setString(8, Name);
+                
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Product details successfully inserted!");
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error inserting product: " + e.getMessage());
+            }
         }
-        else{
-
-        // If the condition is met, proceed with enrollment
-        String sql = "INSERT INTO products(pname, description, cost,quantity ,barcode,areacode,category,name) VALUES(?, ?, ?, ?,?,?,?,?)";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, pname);
-        ps.setString(2, Description);
-        ps.setInt(3, Cost);
-        ps.setInt(4, Quantity);
-        ps.setInt(5,BarCode);
-        ps.setInt(6,Areacode);
-        ps.setString(7,Category);
-        ps.setString(8,Name);
-        ps.executeUpdate();
-
-        JOptionPane.showMessageDialog(null, "Product details successfully inserted!");}
-    } catch (HeadlessException | NumberFormatException | SQLException e) {
-        JOptionPane.showMessageDialog(null, e);
+    } catch (HeadlessException | NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 
