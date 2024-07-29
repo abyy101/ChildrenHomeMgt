@@ -35,7 +35,7 @@
 
     <!-- Task to generate JaCoCo report -->
     <target name="jacoco-report" depends="jacoco-instrumented-test">
-        <taskdef name="jacocoReport" classname="org.jacoco.ant.ReportTask" classpathref="jacoco.path"/>
+        <taskdef name="jacocoReport" classname="org.jacoco.ant.ReportTask" classpathref="C:\Users\wambu\Downloads\jacoco-0.8.12.zip\lib"/>
         <jacocoReport>
             <executiondata>
                 <file file="${jacoco.destfile}"/>
