@@ -17,35 +17,30 @@ import net.proteanit.sql.DbUtils;
  *
  * @author wambu
  */
-public final class showCategory extends javax.swing.JFrame {
+public class showCategory extends javax.swing.JFrame {
 
-     Connection conn;
-/**
+    /**
      * Creates new form showStudent
      */
-        PreparedStatement st;
-    ResultSet rs;
+     Connection conn=null;
+    PreparedStatement st=null;
+    ResultSet rs=null;
     public showCategory() {
         super("Category");
-        this.rs = null;
-        this.conn = null;
-        this.st = null;
         initComponents();
         conn=(Connection) databaseConnection.connection();
         showRecord();
     }
-   public void showRecord() {
-    String sql = "SELECT * FROM category";
-
-    try (PreparedStatement ps = conn.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
-
+    public void showRecord(){
+       try {
+        String sql = "SELECT * FROM category";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, e);
     }
 }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,8 +129,7 @@ public final class showCategory extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          setVisible(false);
-            addCategory object;
-         object = new addCategory();
+            addCategory object = new addCategory();
             object.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -155,24 +149,24 @@ public final class showCategory extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(showCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(showCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(showCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(showCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-         //</editor-fold>
-         
         //</editor-fold>
-       
-       try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new showCategory().setVisible(true);
             }
-        }
-    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(showCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    java.awt.EventQueue.invokeLater(() -> new showCategory().setVisible(true));
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

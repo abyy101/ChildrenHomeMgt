@@ -1,3 +1,4 @@
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import net.proteanit.sql.DbUtils;
  *
  * @author wambu
  */
-public final class showProduct extends javax.swing.JFrame {
+public class showProduct extends javax.swing.JFrame {
  Connection conn=null;
     PreparedStatement st=null;
     ResultSet rs=null;
@@ -28,8 +29,7 @@ public final class showProduct extends javax.swing.JFrame {
 public void showRecord(){
        try {
         String sql = "SELECT * FROM products";
-        PreparedStatement ps;
-           ps = conn.prepareStatement(sql);
+        PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
     } catch (SQLException e) {
@@ -182,8 +182,10 @@ public void showRecord(){
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new showProduct().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new showProduct().setVisible(true);
+            }
         });
     }
 
