@@ -7,8 +7,9 @@ import javax.swing.JOptionPane;
 public class databaseConnection {
     final static String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     final static String DB_URL = "jdbc:mysql://localhost:3306/childrenshome";
-    final static String USER = "root";
-    final static String PASS = "";
+    
+private static final String USER = System.getenv("DB_USER");
+private static final String PASS = System.getenv("DB_PASS");
 
     private static Connection conn;
 
