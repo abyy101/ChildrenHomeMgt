@@ -34,18 +34,18 @@ public final class showCategory extends javax.swing.JFrame {
         conn=(Connection) databaseConnection.connection();
         showRecord();
     }
-    public void showRecord(){
-       try {
-        String sql = "SELECT * FROM category";
-        PreparedStatement ps;
-           ps = conn.prepareStatement(sql);
-        ResultSet rs;
-           rs = ps.executeQuery();
+   public void showRecord() {
+    String sql = "SELECT * FROM category";
+
+    try (PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, e);
     }
 }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
