@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Children'shomemanagement" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Children'shomemanagement.</description>
+    <import file="nbproject/build-impl.xml"/>
+
+    <!-- Path to JaCoCo JAR files -->
+    <path id="jacoco.path">
+        <pathelement location="C:\Users\wambu\Downloads\jacoco-0.8.12.zip\lib\org.jacoco.ant-0.8.12.202403310830.jar"/>
+    </path>
+
+    <!-- Define the JaCoCo agent -->
+    <property name="jacoco.agent" value="C:\Users\wambu\Downloads\jacoco-0.8.12.zip\lib\org.jacoco.agent-0.8.12.202403310830.jar"/>
+    <property name="jacoco.destfile" value="jacoco.exec"/>
+
+    <!-- Configure the JaCoCo JVM arguments -->
+    <target name="-pre-compile">
+        <property name="run.jvmargs" value="-javaagent:${jacoco.agent}=destfile=${jacoco.destfile}"/>
+    </target>
+
+    <!-- Task to run tests with JaCoCo instrumentation -->
+    <target name="jacoco-instrumented-test" depends="compile">
+        <junit printsummary="true" haltonfailure="false">
+            <classpath>
+                <path refid="javac.classpath"/>
+                <pathelement path="${build.classes.dir}"/>
+            </classpath>
+            <formatter type="xml"/>
+            <batchtest todir="${build.test.results.dir}">
+                <fileset dir="test">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!-- Task to generate JaCoCo report -->
+    <target name="jacoco-report" depends="jacoco-instrumented-test">
+        <taskdef name="jacocoReport" classname="org.jacoco.ant.ReportTask" classpathref="C:\Users\wambu\Downloads\jacoco-0.8.12.zip\lib"/>
+        <jacocoReport>
+            <executiondata>
+                <file file="${jacoco.destfile}"/>
+            </executiondata>
+            <structure name="${ant.project.name}">
+                <classfiles>
+                    <fileset dir="${build.classes.dir}"/>
+                </classfiles>
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="src"/>
+                </sourcefiles>
+            </structure>
+            <html destdir="jacoco-report/html"/>
+            <xml destfile="jacoco-report/jacoco.xml"/>
+        </jacocoReport>
+    </target>
+</project>
