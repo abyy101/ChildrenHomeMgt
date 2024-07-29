@@ -31,7 +31,7 @@ public class Admissions extends javax.swing.JFrame {
         this.conn = null;
         this.st = null;
         initComponents();
-        conn=(Connection) databaseConnection.connection();
+        conn=databaseConnection.connection();
     }
 
     /**
