@@ -5,11 +5,11 @@
 
     <!-- Path to JaCoCo JAR files -->
     <path id="jacoco.path">
-        <pathelement location="/path/to/org.jacoco.ant-<version>.jar"/>
+        <pathelement location="C:\Users\wambu\Downloads\jacoco-0.8.12.zip\lib\org.jacoco.ant-0.8.12.202403310830.jar"/>
     </path>
 
     <!-- Define the JaCoCo agent -->
-    <property name="jacoco.agent" value="/path/to/org.jacoco.agent-<version>.jar"/>
+    <property name="jacoco.agent" value="C:\Users\wambu\Downloads\jacoco-0.8.12.zip\lib\org.jacoco.agent-0.8.12.202403310830.jar"/>
     <property name="jacoco.destfile" value="jacoco.exec"/>
 
     <!-- Configure the JaCoCo JVM arguments -->
