@@ -32,11 +32,13 @@ public final class ShowCategory extends javax.swing.JFrame {
         conn=databaseConnection.connection();
         showRecord();
     }
-    public void showRecord(){
-       try {
-        String sql = "SELECT * FROM category";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
+    public void showRecord() {
+    String sql;
+        sql = "SELECT * FROM category";
+
+    try (PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, e);
