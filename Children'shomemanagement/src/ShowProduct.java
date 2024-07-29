@@ -26,16 +26,19 @@ public class ShowProduct extends javax.swing.JFrame {
         conn=databaseConnection.connection();
         showRecord();
     }
-public void showRecord(){
-       try {
-        String sql = "SELECT * FROM products";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
+public void showRecord() {
+    String sql = "SELECT * FROM products";
+    
+    try (PreparedStatement ps = conn.prepareStatement(sql); 
+         ResultSet rs = ps.executeQuery()) {
+        
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, e);
     }
 }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
