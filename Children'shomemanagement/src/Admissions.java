@@ -209,24 +209,24 @@ public class Admissions extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try {
-            String stdName = name.getText();
-            String stdSurName=SurName.getText();
-            String stdCity = city.getText();
-            int stdId = Integer.parseInt(id.getText()); // Get the student ID for the update
-            String sql = "INSERT INTO children( id,stdName, stdSurName,stdCity)VALUES(?,?,?,?)  ";
-            PreparedStatement ps;
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, stdId);
-            ps.setString(2, stdName);
-                        ps.setString(3, stdSurName);
+          String stdName;
+        stdName = name.getText();
+    String stdSurName = SurName.getText();
+    String stdCity = city.getText();
+    int stdId = Integer.parseInt(id.getText()); // Get the student ID for the update
 
-            ps.setString(4, stdCity);
+    String sql = "INSERT INTO children(id, stdName, stdSurName, stdCity) VALUES(?, ?, ?, ?)";
 
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Data is successfully added!");
-        } catch (HeadlessException | NumberFormatException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, stdId);
+        ps.setString(2, stdName);
+        ps.setString(3, stdSurName);
+        ps.setString(4, stdCity);
+
+        ps.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Data is successfully added!");
+    } catch (HeadlessException | NumberFormatException | SQLException e) {
+        JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
