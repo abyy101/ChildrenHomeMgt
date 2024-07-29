@@ -17,18 +17,19 @@ import net.proteanit.sql.DbUtils;
  *
  * @author wambu
  */
-public class showCategory extends javax.swing.JFrame {
+public final class ShowCategory extends javax.swing.JFrame {
 
     /**
      * Creates new form showStudent
      */
-     Connection conn=null;
-    PreparedStatement st=null;
-    ResultSet rs=null;
-    public showCategory() {
+    transient Connection conn=null;
+    transient PreparedStatement st=null;
+    transient ResultSet rs;
+    public ShowCategory() {
         super("Category");
+        this.rs = null;
         initComponents();
-        conn=(Connection) databaseConnection.connection();
+        conn=databaseConnection.connection();
         showRecord();
     }
     public void showRecord(){
@@ -129,7 +130,7 @@ public class showCategory extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          setVisible(false);
-            addCategory object = new addCategory();
+            AddCategory object = new AddCategory();
             object.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -150,22 +151,22 @@ public class showCategory extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(showCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(showCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(showCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(showCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new showCategory().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ShowCategory().setVisible(true);
         });
     }
 

@@ -342,7 +342,7 @@ public class home extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        addProduct object=new addProduct();
+        AddProduct object=new AddProduct();
         object.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -419,7 +419,7 @@ public class home extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        addCategory object=new addCategory();
+        AddCategory object=new AddCategory();
         object.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

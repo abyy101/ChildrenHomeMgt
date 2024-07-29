@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  */
 public class ShowCategoryTest {
     private Connection conn;
-    private showCategory instance;
+    private ShowCategory instance;
     public ShowCategoryTest() {
     }
     
@@ -35,7 +35,7 @@ public class ShowCategoryTest {
     @Before
     public void setUp() {
         conn = databaseConnection.connection();
-        instance = new showCategory();
+        instance = new ShowCategory();
         instance.conn = conn;
     }
     @After
@@ -50,7 +50,7 @@ public class ShowCategoryTest {
         System.out.println("showRecord");
         instance.showRecord();
         // Use reflection to access private jTable1 field
-        Field jTable1Field = showCategory.class.getDeclaredField("jTable1");
+        Field jTable1Field = ShowCategory.class.getDeclaredField("jTable1");
         jTable1Field.setAccessible(true);
         JTable jTable1 = (JTable) jTable1Field.get(instance);
         // Example assertion: Check if jTable1 model is not null

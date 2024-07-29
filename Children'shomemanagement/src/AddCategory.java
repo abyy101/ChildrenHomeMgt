@@ -1,7 +1,9 @@
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /*
@@ -13,19 +15,19 @@ import javax.swing.JOptionPane;
  *
  * @author wambu
  */
-public class addCategory extends javax.swing.JFrame {
+public class AddCategory extends javax.swing.JFrame {
 
     /**
      * Creates new form addStudent
      */
-    Connection conn=null;
-    PreparedStatement st=null;
-    ResultSet rs=null;
+    transient Connection conn=null;
+   transient PreparedStatement st=null;
+    transient ResultSet rs=null;
     
-    public addCategory() {
+    public AddCategory() {
         super("Add Category");
         initComponents();
-        conn=(Connection) databaseConnection.connection();
+        conn=databaseConnection.connection();
     }
 
     /**
@@ -285,7 +287,7 @@ public class addCategory extends javax.swing.JFrame {
 
         ps.executeUpdate();
         JOptionPane.showMessageDialog(null, "Data is successfully inserted!");
-    } catch (Exception e) {
+    } catch (HeadlessException | NumberFormatException | SQLException e) {
         JOptionPane.showMessageDialog(null, e);
     }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -302,13 +304,13 @@ public class addCategory extends javax.swing.JFrame {
         try{
         String name = Name.getText();
         String sql = "DELETE FROM category WHERE name=?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, name);
-        ps.executeUpdate();
-
-        JOptionPane.showMessageDialog(null, "Data is successfully deleted!");
-        ps.close(); 
-    } catch (Exception e) {
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, name);
+                ps.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null, "Data is successfully deleted!");
+            } 
+    } catch (HeadlessException | SQLException e) {
         JOptionPane.showMessageDialog(null, e);
     }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -320,7 +322,7 @@ public class addCategory extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        showCategory object=new showCategory();
+        ShowCategory object=new ShowCategory();
         object.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -346,23 +348,23 @@ public class addCategory extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(addCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(addCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(addCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(addCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new addCategory().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new AddCategory().setVisible(true);
         });
     }
 

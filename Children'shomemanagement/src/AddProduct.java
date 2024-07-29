@@ -1,9 +1,11 @@
 
 
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /*
@@ -16,19 +18,19 @@ import javax.swing.JOptionPane;
  *
  * @author wambu
  */
-public class addProduct extends javax.swing.JFrame {
+public class AddProduct extends javax.swing.JFrame {
 
     /**
      * Creates new form addCourse
      */
-    Connection conn=null;
-    PreparedStatement st=null;
-    ResultSet rs=null;
+    transient Connection conn=null;
+    transient PreparedStatement st=null;
+    transient ResultSet rs=null;
     
-    public addProduct() {
+    public AddProduct() {
         super("Add Product");
         initComponents();
-        conn=(Connection) databaseConnection.connection();
+        conn=databaseConnection.connection();
     }
     private boolean Presenthomes(String name, int areacode) {
         try {
@@ -40,7 +42,7 @@ public class addProduct extends javax.swing.JFrame {
             ResultSet rs = ps.executeQuery();
 
             return rs.next();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
             return false;
         }
@@ -343,7 +345,7 @@ public class addProduct extends javax.swing.JFrame {
         ps.executeUpdate();
 
         JOptionPane.showMessageDialog(null, "Product details successfully inserted!");}
-    } catch (Exception e) {
+    } catch (HeadlessException | NumberFormatException | SQLException e) {
         JOptionPane.showMessageDialog(null, e);
     }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -353,13 +355,13 @@ public class addProduct extends javax.swing.JFrame {
         try{
             String Name = name.getText();
             String sql = "DELETE FROM products WHERE name=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, Name);
-            ps.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Data is successfully deleted!");
-            ps.close();
-        } catch (Exception e) {
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, Name);
+                ps.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null, "Data is successfully deleted!");
+            }
+        } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -367,7 +369,7 @@ public class addProduct extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
            setVisible(false);
-               showProduct object=new showProduct();
+               ShowProduct object=new ShowProduct();
                 object.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -395,24 +397,26 @@ public class addProduct extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(addProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(addProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(addProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(addProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new addProduct().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new AddProduct().setVisible(true);
         });
     }
 

@@ -16,14 +16,14 @@ import net.proteanit.sql.DbUtils;
  *
  * @author wambu
  */
-public class showProduct extends javax.swing.JFrame {
+public class ShowProduct extends javax.swing.JFrame {
  Connection conn=null;
     PreparedStatement st=null;
     ResultSet rs=null;
-    public showProduct() {
+    public ShowProduct() {
         super("products");
         initComponents();
-        conn=(Connection) databaseConnection.connection();
+        conn=databaseConnection.connection();
         showRecord();
     }
 public void showRecord(){
@@ -146,7 +146,7 @@ public void showRecord(){
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
-        addProduct object=new addProduct();
+        AddProduct object=new AddProduct();
         object.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -170,21 +170,23 @@ public void showRecord(){
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(showProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(showProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(showProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(showProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new showProduct().setVisible(true);
+                new ShowProduct().setVisible(true);
             }
         });
     }
