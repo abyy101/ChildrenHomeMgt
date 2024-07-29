@@ -1,4 +1,3 @@
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +15,7 @@ import net.proteanit.sql.DbUtils;
  *
  * @author wambu
  */
-public class showProduct extends javax.swing.JFrame {
+public final class showProduct extends javax.swing.JFrame {
  Connection conn=null;
     PreparedStatement st=null;
     ResultSet rs=null;
@@ -29,7 +28,8 @@ public class showProduct extends javax.swing.JFrame {
 public void showRecord(){
        try {
         String sql = "SELECT * FROM products";
-        PreparedStatement ps = conn.prepareStatement(sql);
+        PreparedStatement ps;
+           ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
     } catch (SQLException e) {
@@ -145,14 +145,12 @@ public void showRecord(){
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         setVisible(false);
         addProduct object=new addProduct();
         object.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -184,10 +182,8 @@ public void showRecord(){
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new showProduct().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new showProduct().setVisible(true);
         });
     }
 
