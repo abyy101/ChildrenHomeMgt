@@ -1,7 +1,9 @@
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /*
@@ -38,7 +40,7 @@ public class addProduct extends javax.swing.JFrame {
             ResultSet rs = ps.executeQuery();
 
             return rs.next();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
             return false;
         }
@@ -309,7 +311,7 @@ public class addProduct extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
         try {
         String pname=Pname.getText();
         String Description = decription.getText();
@@ -325,7 +327,7 @@ public class addProduct extends javax.swing.JFrame {
         
         if (!Presenthomes(Name, Areacode)) {
             JOptionPane.showMessageDialog(null, "Cannot add products, home is not registered.");
-            return; // Stop enrollment if home is not active
+            // Stop enrollment if home is not active
         }
         else{
 
@@ -343,7 +345,7 @@ public class addProduct extends javax.swing.JFrame {
         ps.executeUpdate();
 
         JOptionPane.showMessageDialog(null, "Product details successfully inserted!");}
-    } catch (Exception e) {
+    } catch (HeadlessException | NumberFormatException | SQLException e) {
         JOptionPane.showMessageDialog(null, e);
     }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -353,13 +355,13 @@ public class addProduct extends javax.swing.JFrame {
         try{
             String Name = name.getText();
             String sql = "DELETE FROM products WHERE name=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, Name);
-            ps.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Data is successfully deleted!");
-            ps.close();
-        } catch (Exception e) {
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, Name);
+                ps.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null, "Data is successfully deleted!");
+            }
+        } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -407,10 +409,8 @@ public class addProduct extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new addProduct().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new addProduct().setVisible(true);
         });
     }
 
