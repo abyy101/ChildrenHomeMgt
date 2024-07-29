@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class ShowProductTest {
     private Connection conn;
-    private showProduct instance;
+    private ShowProduct instance;
 
     public ShowProductTest() {
     }
@@ -30,7 +30,7 @@ public class ShowProductTest {
     @Before
     public void setUp() {
         conn = databaseConnection.connection(); // Establish connection
-        instance = new showProduct(); // Create instance of showProduct
+        instance = new ShowProduct(); // Create instance of showProduct
         instance.conn = conn; // Inject the connection into the instance
     }
 
@@ -53,7 +53,7 @@ public class ShowProductTest {
         instance.showRecord(); // Call the method to populate jTable1
 
         // Use reflection to access private jTable1 field
-        Field jTable1Field = showProduct.class.getDeclaredField("jTable1");
+        Field jTable1Field = ShowProduct.class.getDeclaredField("jTable1");
         jTable1Field.setAccessible(true); // Make the field accessible
         JTable jTable1 = (JTable) jTable1Field.get(instance); // Get the jTable1 instance
 
