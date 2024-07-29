@@ -17,16 +17,19 @@ import net.proteanit.sql.DbUtils;
  *
  * @author wambu
  */
-public class showCategory extends javax.swing.JFrame {
+public final class showCategory extends javax.swing.JFrame {
 
-    /**
+     Connection conn;
+/**
      * Creates new form showStudent
      */
-     Connection conn=null;
-    PreparedStatement st=null;
-    ResultSet rs=null;
+        PreparedStatement st;
+    ResultSet rs;
     public showCategory() {
         super("Category");
+        this.rs = null;
+        this.conn = null;
+        this.st = null;
         initComponents();
         conn=(Connection) databaseConnection.connection();
         showRecord();
@@ -34,8 +37,10 @@ public class showCategory extends javax.swing.JFrame {
     public void showRecord(){
        try {
         String sql = "SELECT * FROM category";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
+        PreparedStatement ps;
+           ps = conn.prepareStatement(sql);
+        ResultSet rs;
+           rs = ps.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, e);
@@ -129,7 +134,8 @@ public class showCategory extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          setVisible(false);
-            addCategory object = new addCategory();
+            addCategory object;
+         object = new addCategory();
             object.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

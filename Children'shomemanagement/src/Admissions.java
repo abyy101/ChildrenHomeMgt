@@ -1,7 +1,9 @@
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /*
@@ -16,15 +18,18 @@ import javax.swing.JOptionPane;
  */
 public class Admissions extends javax.swing.JFrame {
 
-    /**
+    Connection conn;
+/**
      * Creates new form Student
      */
-    Connection conn=null;
-    PreparedStatement st=null;
-    ResultSet rs=null;
+        PreparedStatement st;
+    ResultSet rs;
     
     public Admissions() {
         super("Student");
+        this.rs = null;
+        this.conn = null;
+        this.st = null;
         initComponents();
         conn=(Connection) databaseConnection.connection();
     }
@@ -210,7 +215,8 @@ public class Admissions extends javax.swing.JFrame {
             String stdCity = city.getText();
             int stdId = Integer.parseInt(id.getText()); // Get the student ID for the update
             String sql = "INSERT INTO children( id,stdName, stdSurName,stdCity)VALUES(?,?,?,?)  ";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps;
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, stdId);
             ps.setString(2, stdName);
                         ps.setString(3, stdSurName);
@@ -219,7 +225,7 @@ public class Admissions extends javax.swing.JFrame {
 
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Data is successfully added!");
-        } catch (Exception e) {
+        } catch (HeadlessException | NumberFormatException | SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -253,10 +259,8 @@ public class Admissions extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Admissions().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Admissions().setVisible(true);
         });
     }
 
