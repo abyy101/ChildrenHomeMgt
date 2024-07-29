@@ -18,12 +18,9 @@ import javax.swing.JOptionPane;
  */
 public class Admissions extends javax.swing.JFrame {
 
-    Connection conn;
-/**
-     * Creates new form Student
-     */
-        PreparedStatement st;
-    ResultSet rs;
+    transient Connection conn;
+    transient PreparedStatement st;
+    transient ResultSet rs;
     
     public Admissions() {
         super("Student");
