@@ -5,7 +5,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY Children/'shomemanagement/Children_shomemanagement.jar /app/Children_shomemanagement.jar
+COPY "C:\Users\wambu\OneDrive\Documents\NetBeansProjects\Children'shomemanagement\childrenhomemgt\Children'shomemanagement\Children_shomemanagement.jar"  /app/Children_shomemanagement.jar
 
 # Expose the port your application will run on
 EXPOSE 8080
