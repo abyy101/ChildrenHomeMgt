@@ -59,7 +59,6 @@ public class ShowCategoryTest {
         // This assumes jTable1 is filled with data correctly from the database
         assertEquals(3, jTable1.getModel().getRowCount()); // Adjust as per your actual expected row count
     }
-    // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
     // @Test
