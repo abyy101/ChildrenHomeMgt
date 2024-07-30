@@ -1,11 +1,14 @@
-# Use an official OpenJDK runtime as a parent image
+# Use an official JDK runtime as a parent image
 FROM openjdk:11-jre-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the JAR file into the container at /app
-COPY app.jar /app/app.jar
+# Copy the JAR file into the container
+COPY dist/Children_shomemanagement.jar /app/Children_shomemanagement.jar
 
-# Run the JAR file
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+# Expose the port your application will run on
+EXPOSE 8080
+
+# Define the command to run your application
+CMD ["java", "-jar", "Children_shomemanagement.jar"]
